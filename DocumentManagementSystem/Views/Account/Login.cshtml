@@ -1,0 +1,20 @@
+﻿@model DocumentManagementSystem.Models.LoginModel
+
+<form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
+    <div class="container" style="height: 100vh; overflow: hidden;">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-md-4 text-center" style="margin: auto;">
+                <div class="validation" asp-validation-summary="ModelOnly"></div>
+                <div class="form-group">
+                    <input type="text" asp-for="Login" class="form-control mForm-4" placeholder="Имя пользователя">
+                    <span asp-validation-for="Login" />
+                </div>
+                <div class="form-group">
+                    <input type="password" asp-for="Password" class="form-control mForm-4 mt-3" id="exampleInputPassword1" placeholder="Пароль">
+                    <span asp-validation-for="Password" />
+                </div>
+                <button type="submit" class="btn btn-login mt-3">Войти</button>
+            </div>
+        </div>
+    </div>
+</form>
