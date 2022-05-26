@@ -80,6 +80,12 @@ namespace DocumentManagementSystem.Controllers
             }
             return View(model);
         }
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
         private async Task Authenticate(User user)
         {
             var claims = new List<Claim>

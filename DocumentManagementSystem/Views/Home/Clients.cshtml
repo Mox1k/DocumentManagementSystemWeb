@@ -1,0 +1,118 @@
+﻿@model DocumentManagementSystem.Models.ClientPageModel;
+
+<form asp-action="Clients" asp-controller="Home" method="get" asp-anti-forgery="true">
+<div class="modal fade" id="findClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Поиск</h5>
+                <button type="button" class="btn-doc" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- SOME CODE HERE MOTHERFUCKER -->
+                <div>
+                    <p>Введите данные: <input name="Name" type="text" class="form-control mForm-4" placeholder="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-doc" data-bs-dismiss="modal">Найти</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<form asp-action="Clients" asp-controller="Home" asp-anti-forgery="true">
+<!-- Modal -->
+<div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Запись нового клиента</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- SOME CODE HERE MOTHERFUCKER -->
+                <div>
+                    <p>Код: <input asp-for="@Model.Model2.Code" type="text" class="form-control mForm-4" placeholder="">
+                    <p>Наименование: <input asp-for="@Model.Model2.Name" type="text" class="form-control mForm-4" placeholder="">
+                    <p>ФИО или название фирмы: <input asp-for="@Model.Model2.NameFirm" type="text" class="form-control mForm-4" placeholder="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-doc" data-bs-dismiss="modal">Создать</button>
+                <button type="button" class="btn btn-doc">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+<form asp-action="DeleteClients" asp-controller="Home" method="post" asp-anti-forgery="true">
+    <div class="modal fade" id="deleteClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Удалить</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- SOME CODE HERE MOTHERFUCKER -->
+                    <div>
+                        <p>Введите код клиента: <input name="code" type="text" class="form-control mForm-4" placeholder="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-doc" data-bs-dismiss="modal">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="container" style="height: 100vh; overflow: hidden;">
+    <div class="mCont">
+        <div class="row">
+            <div class="justify-content-end d-flex">
+                <a asp-action="Index" asp-controller="Home">
+                    <div class="exit btn-close"></div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between justify-content-center align-items-center">
+                <div class="">
+                    <button type="button" class="btn btn-doc" data-bs-toggle="modal" data-bs-target="#addClient">
+                        Создать
+                    </button>
+                    <button type="button" class="btn btn-doc" data-bs-toggle="modal" data-bs-target="#findClient">
+                        Найти
+                    </button>
+                    <button type="button" class="btn btn-doc" data-bs-toggle="modal"
+                            data-bs-target="#deleteClient">Удалить
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="mTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Наименование</th>
+                        <th scope="col">Код</th>
+                        <th scope="col">ФИО или название фирмы клиента</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var Item in Model.Model1)
+                    {
+                        <tr>
+                        <td>@Item.Name</td>
+                        <td>@Item.Code</td>
+                        <td>@Item.NameFirm</td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
