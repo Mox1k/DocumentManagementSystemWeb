@@ -1,0 +1,71 @@
+﻿@model DocumentManagementSystem.Models.ClientPageModel;
+<form asp-action="CreateDocument" asp-controller="Home" asp-anti-forgery="true">
+<div class="container" style="height: 100vh; overflow: hidden;">
+        <div class="mCont">
+            <div class="row">
+                <div class="justify-content-end d-flex">
+                    <a asp-action="Index" asp-controller="Home">
+                        <div class="exit btn-close"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-between justify-content-center align-items-center">
+                    <div>
+                        <div class="btn btn-doc" onclick="download()">Сохранить документ</div>
+                        <button type="submit" class="btn btn-doc">Сохранить в базу данных</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label for="exampleInputEmail1">Номер: </label>
+                    <input name="Number" type="text" class="form-control mForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-5">
+                    <label for="exampleInputEmail1">Дата: </label>
+                    <input name="Date" id="startDate" class="form-control mForm" type="date" />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label for="exampleInputEmail1">Текст: </label>
+                    <textarea name="Text" type="email" class="form-control mForm-2" id="mytextarea"
+                        aria-describedby="createTextInput" placeholder="Перетащите txt файл сюда для загрузки"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    function download() {
+    var text = document.getElementById("mytextarea").value;
+    text = text.replace(/\n/g, "\r\n"); // To retain the Line breaks.
+    var blob = new Blob([text], { type: "text/plain" });
+    var anchor = document.createElement("a");
+    anchor.download = "my-filename.txt";
+    anchor.href = window.URL.createObjectURL(blob);
+    anchor.target = "_blank";
+    anchor.style.display = "none"; // just to be safe!
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+}
+
+function dropfile(file) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        mytextarea.value = e.target.result;
+    };
+    reader.readAsText(file, "UTF-8");
+}
+
+mytextarea.ondrop = function (e) {
+    e.preventDefault();
+    var file = e.dataTransfer.files[0];
+    dropfile(file);
+};
+</script>

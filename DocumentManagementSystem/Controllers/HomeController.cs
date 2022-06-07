@@ -13,6 +13,7 @@ namespace DocumentManagementSystem.Controllers
         private readonly ApplicationDbContext _context;
         private ClientPageModel _pageModel = new ClientPageModel();
         private EmployeePageModel _employeeModel = new EmployeePageModel();
+        private DocumentPageModel _doucmentModel = new DocumentPageModel();
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
@@ -138,6 +139,26 @@ namespace DocumentManagementSystem.Controllers
             }
 
             return RedirectToAction("Employees", "Home");
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateDocument(DocumentPageModel document)
+        {
+            if (document.Model1 != null)
+            {
+                var doc = new Document()
+                {
+                    Number = document.Model1.Number,
+                    Date = document.Model1.Date,
+                    Text = document.Model1.Text
+                };
+                _context.Documents.Add(doc);
+            }
+            return RedirectToAction("Documents", "Home");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Documents()
+        {
+            return View();
         }
     }
 }

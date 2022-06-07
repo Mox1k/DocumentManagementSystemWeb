@@ -8,6 +8,7 @@ namespace DocumentManagementSystem.Data.Contexts
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Role> Roles { get; set; } = null!;
         public DbSet<Client> Clients { get; set; } = null!;
+        public DbSet<Document> Documents { get; set; } = null!;
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
