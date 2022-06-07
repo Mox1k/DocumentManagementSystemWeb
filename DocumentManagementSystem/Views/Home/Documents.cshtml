@@ -21,19 +21,19 @@
             <div class="row mt-3">
                 <div class="col-2">
                     <label for="exampleInputEmail1">Название: </label>
-                    <input name="Name" type="text" class="form-control mForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input asp-for="@Model.Model1.Name" type="text" class="form-control mForm" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-5">
                     <label for="exampleInputEmail1">Дата: </label>
-                    <input name="Date" id="startDate" class="form-control mForm" type="date" />
+                    <input asp-for="@Model.Model1.Date" id="startDate" class="form-control mForm" type="date" />
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="exampleInputEmail1">Текст: </label>
-                    <textarea name="Text" type="email" class="form-control mForm-2" id="mytextarea"
+                    <textarea asp-for="@Model.Model1.Text" type="email" class="form-control mForm-2" id="mytextarea"
                         aria-describedby="createTextInput" placeholder="Перетащите txt файл сюда для загрузки"></textarea>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                                 @item.Name
                             </td>
                             <td>
-                                @item.Date
+                                @item.Date.ToString("G");
                             </td>
                             <td>
                                 <button class=" btn-doc">Скачать</button>

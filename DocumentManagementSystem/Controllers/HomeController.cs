@@ -143,18 +143,15 @@ namespace DocumentManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDocument(DocumentPageModel document)
         {
-            if (document.Model1 != null)
+            var doc = new Document()
             {
-                var doc = new Document()
-                {
-                    Name = document.Model1.Name,
-                    Date = document.Model1.Date,
-                    Text = document.Model1.Text
-                };
-                _context.Documents.Add(doc);
+                Name = document.Model1.Name,
+                Date = document.Model1.Date,
+                Text = document.Model1.Text
+            };
+            _context.Documents.Add(doc);
 
-                await _context.SaveChangesAsync();
-            }
+            await _context.SaveChangesAsync();
             return RedirectToAction("Documents", "Home");
         }
         [HttpGet]
