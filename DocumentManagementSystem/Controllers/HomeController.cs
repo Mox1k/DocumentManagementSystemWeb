@@ -163,5 +163,19 @@ namespace DocumentManagementSystem.Controllers
 
             return View(_doucmentModel);
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteDocument(int Id)
+        {
+
+            if (Id != null)
+            {
+                var document = await _context.Documents.FindAsync(Id);
+
+                _context.Remove(document);
+
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Documents", "Home");
+        }
     }
 }

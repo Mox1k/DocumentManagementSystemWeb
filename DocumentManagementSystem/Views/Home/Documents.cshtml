@@ -1,8 +1,8 @@
 ﻿@model DocumentManagementSystem.Models.DocumentPageModel;
 
-<form asp-action="CreateDocument" asp-controller="Home" asp-anti-forgery="true">
 <div class="container" style="height: 100vh; overflow: hidden;">
         <div class="mCont">
+            <form asp-action="CreateDocument" asp-controller="Home" asp-anti-forgery="true">
             <div class="row">
                 <div class="justify-content-end d-flex">
                     <a asp-action="Index" asp-controller="Home">
@@ -37,13 +37,14 @@
                         aria-describedby="createTextInput" placeholder="Перетащите txt файл сюда для загрузки"></textarea>
                 </div>
             </div>
+            </form>
               <div class="row">
                 <table class="mTable">
                     <thead>
                         <tr>
                             <th scope="col">Название файла</th>
                             <th scope="col">Дата создания</th>
-                            <th scope="col">Скачать</th>
+                            <th scope="col">Удалить</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +57,9 @@
                                 @item.Date.ToShortDateString();
                             </td>
                             <td>
-                                <button type="button" onclick="buttdownload("asdsadasd")" class="btn-doc">Скачать</button>
+                                <form asp-action="DeleteDocument" asp-route-id="@item.Id" asp-controller="Home" asp-anti-forgery="true">
+                                    <button type="submit" class="btn-doc">Удалить</button>
+                                </form>
                             </td>
                         </tr>
                         }
@@ -65,7 +68,6 @@
             </div>
         </div>
     </div>
-</form>
 
 <script>
     function download() {
@@ -96,17 +98,5 @@ mytextarea.ondrop = function (e) {
     dropfile(file);
 };
 
-function buttdownload(text) {
-    text = text.replace(/\n/g, "\r\n"); // To retain the Line breaks.
-    var blob = new Blob([text], { type: "text/plain" });
-    var anchor = document.createElement("a");
-    anchor.download = "my-filename.txt";
-    anchor.href = window.URL.createObjectURL(blob);
-    anchor.target = "_blank";
-    anchor.style.display = "none"; // just to be safe!
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
-}
 
 </script>
