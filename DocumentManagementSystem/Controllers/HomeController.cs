@@ -147,18 +147,24 @@ namespace DocumentManagementSystem.Controllers
             {
                 var doc = new Document()
                 {
-                    Number = document.Model1.Number,
+                    Name = document.Model1.Name,
                     Date = document.Model1.Date,
                     Text = document.Model1.Text
                 };
                 _context.Documents.Add(doc);
+
+                await _context.SaveChangesAsync();
             }
             return RedirectToAction("Documents", "Home");
         }
         [HttpGet]
         public async Task<IActionResult> Documents()
         {
-            return View();
+            var documents = await _context.Documents.ToListAsync();
+
+            _doucmentModel.Model2 = documents;
+
+            return View(_doucmentModel);
         }
     }
 }
