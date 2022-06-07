@@ -1,0 +1,124 @@
+﻿@model DocumentManagementSystem.Models.EmployeePageModel
+
+<form asp-action="DeleteEmployee" asp-controller="Home" method="post" asp-anti-forgery="true">
+<div class="modal fade" id="deleteEmploee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Удалить</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- SOME CODE HERE MOTHERFUCKER -->
+                <div>
+                    <p>Введите код работника: <input name="Id" type="text" class="form-control mForm-4" placeholder="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-doc" data-bs-dismiss="modal">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+<form asp-action="Employees" asp-controller="Home" method="get" asp-antiforgery="true">
+<div class="modal fade" id="findEmploee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Поиск</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- SOME CODE HERE MOTHERFUCKER -->
+                <div>
+                    <p>Введите код работника: <input name="Id" type="text" class="form-control mForm-4" placeholder="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-doc" data-bs-dismiss="modal">Найти</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+<form  asp-action="ChangeRoleEmployee" asp-controller="Home" method="post" asp-antiforgery="true">
+<!-- Modal -->
+    <div class="modal fade" id="addEmploee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Изменить данные сотрудника </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- SOME CODE HERE MOTHERFUCKER -->
+                    <div>
+                        <p>Код: <input type="text" name="Id" class="form-control mForm-4" placeholder="">
+                        <p>Должность:
+                            <select name="RoleId" class="form-select btn-doc" aria-label="Default select example">
+                                @foreach(var Item in Model.Model2)
+                                    {
+                                        <option value="@Item.Id">@Item.Name</option>   
+                                    }
+                            </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-doc" data-bs-dismiss="modal">Изменить</button>
+                    <button type="button" class="btn btn-doc" data-bs-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="container" style="height: 100vh; overflow: hidden;">
+    <div class="mCont">
+        <div class="row">
+            <div class="justify-content-end d-flex">
+                <a href="index.html">
+                    <div class="exit btn-close"></div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between justify-content-center align-items-center">
+                <div>
+                    <button type="button" class="btn btn-doc" data-bs-toggle="modal" data-bs-target="#addEmploee">
+                        Изменить роль
+                    </button>
+                    <button type="button" class="btn btn-doc" data-bs-toggle="modal" data-bs-target="#findEmploee">
+                        Найти
+                    </button>
+                    <button type="button" class="btn btn-doc" data-bs-toggle="modal" data-bs-target="#deleteEmploee">
+                        Удалить
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="mTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Должность</th>
+                        <th scope="col">Код</th>
+                        <th scope="col">ФИО сотрудника</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var Item in Model.Model1)
+                    {
+                        <tr>
+                            <td>@Item.Role</td>
+                            <td>@Item.Id</td>
+                            <td>@Item.Surname @Item.Name @Item.Patronymic</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

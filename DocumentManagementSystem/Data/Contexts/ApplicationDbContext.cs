@@ -19,12 +19,10 @@ namespace DocumentManagementSystem.Data.Contexts
         {
             string adminRoleName = "admin";
             string userRoleName = "user";
-            
-            Guid adminRoleId = Guid.NewGuid();
-            Guid userRoleId = Guid.NewGuid();
+           
 
-            Role adminRole = new Role { Id = adminRoleId, Name = adminRoleName };
-            Role userRole = new Role { Id = userRoleId, Name = userRoleName };
+            Role adminRole = new Role { Id = 1, Name = adminRoleName };
+            Role userRole = new Role { Id = 2, Name = userRoleName };
 
             modelBuilder.Entity<Role>().HasData(new Role[] { adminRole, userRole });
             base.OnModelCreating(modelBuilder);

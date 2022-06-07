@@ -7,16 +7,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DocumentManagementSystem.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
         private ClientPageModel _pageModel = new ClientPageModel();
+        private EmployeePageModel _employeeModel = new EmployeePageModel();
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
 
         }
-        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -65,6 +66,78 @@ namespace DocumentManagementSystem.Controllers
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Clients", "Home");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Employees(int? Id)
+        {
+            var roles = await _context.Roles.ToListAsync();
+
+            _employeeModel.Model2 = roles;
+
+            if (Id == null)
+            {
+                var users = await _context.Users.Include(x => x.Role).ToListAsync();
+                foreach (var user in users)
+                {
+                    _employeeModel.Model1.Add(new EmployeeModel()
+                    {
+                        Id = user.Id,
+                        Name = user.Name,
+                        Surname = user.Surname,
+                        Patronymic = user.Patronymic,
+                        Role = user.Role.Name.ToString()
+                    });
+                }
+            }
+            else
+            {
+                var user = await _context.Users.Include(x => x.Role).Where(x => x.Id == Id).FirstOrDefaultAsync();
+                if (user != null)
+                {
+                    _employeeModel.Model1.Add(new EmployeeModel()
+                    {
+                        Id = user.Id,
+                        Name = user.Name,
+                        Patronymic = user.Patronymic,
+                        Surname = user.Surname,
+                        Role = user.Role.Name
+                    });
+                }
+            }
+            return View(_employeeModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteEmployee(int? Id)
+        {
+            if (Id != null)
+            {
+                var user = await _context.Users.FindAsync(Id);
+                if (user != null)
+                {
+                    _context.Users.Remove(user);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Employees", "Home");
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangeRoleEmployee(int? RoleId, int? Id)
+        {
+            if (RoleId != null && Id != null)
+            {
+                var user = await _context.Users.FindAsync(Id);
+                var role = await _context.Roles.Where(x => x.Id == RoleId).FirstOrDefaultAsync();
+
+                if (user != null && role != null)
+                {
+                    user.RoleId = role.Id;
+                    _context.Users.Update(user);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+            return RedirectToAction("Employees", "Home");
         }
     }
 }
