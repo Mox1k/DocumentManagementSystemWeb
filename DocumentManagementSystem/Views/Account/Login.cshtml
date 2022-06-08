@@ -4,7 +4,7 @@
     <div class="container" style="height: 100vh; overflow: hidden;">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-4 text-center" style="margin: auto;">
-                <div class="validation" asp-validation-summary="ModelOnly"></div>
+                <div class="validation" style="color: red;" asp-validation-summary="ModelOnly"></div>
                 <div class="form-group">
                     <input type="text" asp-for="Login" class="form-control mForm-4" placeholder="Имя пользователя">
                     <span asp-validation-for="Login" />
@@ -15,6 +15,12 @@
                 </div>
                 <button type="submit" class="btn btn-login mt-3">Войти</button>
                  <button asp-action="Register" asp-controller="Account"  class="btn btn-login mt-3">Регистрация</button>
+                 <div style="display: block; color: red;" >
+                     @Html.ValidationMessageFor(model => model.Login)
+                 </div>
+                 <div style="display: block; color: red;">
+                     @Html.ValidationMessageFor(model => model.Password)
+                 </div>
             </div>
         </div>
     </div>

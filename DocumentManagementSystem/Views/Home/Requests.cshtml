@@ -1,0 +1,97 @@
+﻿@model DocumentManagementSystem.Models.RequestPageModel
+
+
+ <div class="container" style="height: 100vh; overflow: hidden;">
+        <div class="mCont">
+            <form asp-action="CreateRequest" asp-controller="Home" method="post" asp-anti-forgery="true">
+            <div class="row">
+                <div class="justify-content-end  d-flex">
+                    <a asp-action="Index" asp-controller="Home">
+                        <div class="exit btn-close"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-between justify-content-center align-items-center">
+                    <div>
+                        <button type="submit" class="btn btn-doc">Записать</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label for="exampleInputEmail1">Номер: </label>
+                    <input asp-for="@Model.Model1.NumberReq" type="text" class="form-control mForm" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-5">
+                    <label for="exampleInputEmail1">Дата: </label>
+                    <input asp-for="@Model.Model1.DateReq" id="startDate" class="form-control mForm" type="date"/>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label for="exampleInputEmail1">Название заявки: </label>
+                    <input asp-for="@Model.Model1.NameReq" type="text" class="form-control mForm-2" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label for="exampleInputEmail1">Заказчик: </label>
+                    <select asp-for="@Model.Model1.ClientId" class="form-select btn-doc" aria-label="Default select example">
+                                @foreach(var Item in Model.Model2)
+                                    {
+                                        <option value="@Item.Id">@Item.Name | @Item.NameFirm</option>   
+                                    }
+                   </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label for="exampleInputEmail1">Описание заявки: </label>
+                    <input asp-for="@Model.Model1.TextReq" type="text" class="form-control mForm-3" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+            </div>
+             </form>
+              <div class="row">
+                <table class="mTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Название файла</th>
+                            <th scope="col">Дата создания</th>
+                            <th scope="col">Содержание</th>
+                            <th scope="col">Заказчик</th>
+                            <th scope="col">Удалить</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model.Model3){
+                         <tr>
+                            <td>
+                                @item.NameReq
+                            </td>
+                              <td>
+                                @item.DateReq.ToShortDateString()
+                            </td>
+                            <td>
+                                @item.TextReq
+                            </td>
+                            <td>
+                                @if (item.Client != null)
+                                {
+                                    <span>@item.Client.Name</span>
+                                }
+                            </td>
+                            <td>
+                                <form asp-action="DeleteRequest" asp-route-id="@item.Id" asp-controller="Home" asp-anti-forgery="true">
+                                    <button type="submit" class="btn-doc">Удалить</button>
+                                </form>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

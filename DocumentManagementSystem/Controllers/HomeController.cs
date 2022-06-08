@@ -171,8 +171,8 @@ namespace DocumentManagementSystem.Controllers
             if (Id != null)
             {
                 var document = await _context.Documents.FindAsync(Id);
-
-                _context.Remove(document);
+                if (document != null)
+                    _context.Remove(document);
 
                 await _context.SaveChangesAsync();
             }
@@ -188,9 +188,47 @@ namespace DocumentManagementSystem.Controllers
                 DateReq = request.Model1.DateReq,
                 NumberReq = request.Model1.NumberReq,
                 TextReq = request.Model1.TextReq,
-
+                ClientId = request.Model1.ClientId,
             };
-            _context.Documents.Add(req);
+            _context.Requests.Add(req);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Requests", "Home");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Requests(RequestPageModel request)
+        {
+            var clients = await _context.Clients.ToListAsync();
+            _requestModel.Model2 = clients;
+            var req = await _context.Requests.Include(x => x.Client).ToListAsync();
+            _requestModel.Model3 = req;
+            return View(_requestModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteRequest(int Id)
+        {
+
+            if (Id != null)
+            {
+                var req = await _context.Requests.FindAsync(Id);
+
+                if (req != null)
+                    _context.Remove(req);
+
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Requests", "Home");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DocumentShow(int Id)
+        {
+            var doc = await _context.Documents.FindAsync(Id);
+            DocumentShowModel document = new DocumentShowModel()
+            {
+                Text = doc.Text,
+            };
+
+            return View(document);
         }
     }
 }

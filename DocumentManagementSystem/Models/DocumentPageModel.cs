@@ -7,7 +7,5 @@ namespace DocumentManagementSystem.Models
         public DocumentModel Model1 { get; set; }
 
         public List<Document> Model2 { get; set; } = new List<Document>();
-
-
     }
 }

@@ -18,6 +18,7 @@ namespace DocumentManagementSystem.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Не указан повторный пароль")]
         [Compare("Password", ErrorMessage = "Пароль введен неверно")]
         public string ConfirmPassword { get; set; }
     }

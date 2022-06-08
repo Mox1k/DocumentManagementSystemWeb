@@ -2,9 +2,9 @@
 
 <form asp-action="Register" asp-controller="Account" asp-anti-forgery="true">  
     <div class="container" style="height: 100vh; overflow: hidden;">
-        <div class="validation" asp-validation-summary="ModelOnly"></div>
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-4 text-center" style="margin: auto;">
+                <div class="validation" asp-validation-summary="ModelOnly" style="color: red;"></div>
                 <input asp-for="Name" type="text" class="form-control mForm-4" placeholder="Имя">
                 <span asp-validation-for="Name" />
                 <input asp-for="Surname" type="text" class="form-control mForm-4 mt-3" placeholder="Фамилия">
@@ -18,6 +18,24 @@
                 <input asp-for="ConfirmPassword" type="password" class="form-control mForm-4 mt-3" id="exampleInputPassword1" placeholder="Пароль еще раз">
                 <span asp-validation-for="ConfirmPassword" />
                 <button type="submit" class="btn btn-login mt-3">Зарегестрироваться</button>
+                <div style="display: block; color: red;" >
+                     @Html.ValidationMessageFor(model => model.Name)
+                 </div>
+                 <div style="display: block; color: red;">
+                     @Html.ValidationMessageFor(model => model.Surname)
+                 </div>
+                 <div style="display: block; color: red;" >
+                     @Html.ValidationMessageFor(model => model.Patronymic)
+                 </div>
+                 <div style="display: block; color: red;">
+                     @Html.ValidationMessageFor(model => model.Login)
+                 </div>
+                 <div style="display: block; color: red;" >
+                     @Html.ValidationMessageFor(model => model.Password)
+                 </div>
+                 <div style="display: block; color: red;">
+                     @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                 </div>
             </div>
         </div>
     </div>

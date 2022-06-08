@@ -1,0 +1,17 @@
+﻿@model DocumentManagementSystem.Models.DocumentShowModel;
+
+<div class="container" style="height: 100vh; overflow: hidden;">
+    <div class="mCont">
+        <div class="row">
+                <div class="justify-content-end d-flex">
+                    <a asp-action="Documents" asp-controller="Home">
+                        <div class="exit btn-close"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="row"> 
+                <textarea style="height: 80vh" type="text" class="form-control mForm-2" id="mytextarea"
+        aria-describedby="createTextInput" placeholder="Перетащите txt файл сюда для загрузки">@Model.Text</textarea>
+        </div>
+    </div>
+</div>

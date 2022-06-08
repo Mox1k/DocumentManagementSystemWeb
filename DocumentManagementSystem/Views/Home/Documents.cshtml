@@ -60,6 +60,9 @@
                                 <form asp-action="DeleteDocument" asp-route-id="@item.Id" asp-controller="Home" asp-anti-forgery="true">
                                     <button type="submit" class="btn-doc">Удалить</button>
                                 </form>
+                                <form asp-action="DocumentShow" method="get" asp-route-id="@item.Id" asp-controller="Home" asp-anti-forgery="true">
+                                    <button type="submit" class="btn-doc">Посмотреть</button>
+                                </form>
                             </td>
                         </tr>
                         }

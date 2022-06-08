@@ -8,6 +8,6 @@
         public string NameReq { get; set; }
         public string TextReq { get; set; }
         public Client? Client { get; set; }
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
     }
 }
