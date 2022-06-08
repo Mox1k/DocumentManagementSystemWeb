@@ -14,6 +14,7 @@ namespace DocumentManagementSystem.Controllers
         private ClientPageModel _pageModel = new ClientPageModel();
         private EmployeePageModel _employeeModel = new EmployeePageModel();
         private DocumentPageModel _doucmentModel = new DocumentPageModel();
+        private RequestPageModel _requestModel = new RequestPageModel();
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
@@ -176,6 +177,20 @@ namespace DocumentManagementSystem.Controllers
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Documents", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRequest(RequestPageModel request)
+        {
+            var req = new Request()
+            {
+                NameReq = request.Model1.NameReq,
+                DateReq = request.Model1.DateReq,
+                NumberReq = request.Model1.NumberReq,
+                TextReq = request.Model1.TextReq,
+
+            };
+            _context.Documents.Add(req);
         }
     }
 }
