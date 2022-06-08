@@ -18,14 +18,22 @@ namespace DocumentManagementSystem.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            string adminRoleName = "admin";
-            string userRoleName = "user";
-           
+            string directorRoleName = "Директор";
+            string managerRoleName = "Менеджер";
+            string accountantRoleName = "Бухгалтер";
+            string scepProRoleName = "Специалист по исполнительной документации";
+            string specMinRoleName = "Специалист";
 
-            Role adminRole = new Role { Id = 1, Name = adminRoleName };
-            Role userRole = new Role { Id = 2, Name = userRoleName };
 
-            modelBuilder.Entity<Role>().HasData(new Role[] { adminRole, userRole });
+
+            Role directorRole = new Role { Id = 1, Name = directorRoleName };
+            Role managerRole = new Role { Id = 2, Name = managerRoleName };
+            Role accountantRole = new Role { Id = 3, Name = accountantRoleName };
+            Role scepProRole = new Role { Id = 4, Name = scepProRoleName };
+            Role specMinRole = new Role { Id = 5, Name = specMinRoleName };
+
+
+            modelBuilder.Entity<Role>().HasData(new Role[] { directorRole, managerRole, accountantRole, scepProRole, specMinRole });
             base.OnModelCreating(modelBuilder);
         }
     }

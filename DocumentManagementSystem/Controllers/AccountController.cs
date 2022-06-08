@@ -38,7 +38,7 @@ namespace DocumentManagementSystem.Controllers
                         Surname = model.Surname,
                         Patronymic = model.Patronymic,
                     };
-                    Role userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+                    Role userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Менеджер");
 
                     if (userRole != null)
                         user.Role = userRole;
